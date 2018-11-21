@@ -7,6 +7,7 @@
 ## scripts usually visible in ~/miniconda3/envs/lefse/bin/ if was installed to default directory
 ## 
 
+conda_env=${1:-lefse}
 
 # Download a 3-classes example (with subclasses and subjects) from huttenhower.sph.harvard.edu
 # It is a small subset of the HMP 16S dataset for finding biomarkers characterizing
@@ -14,7 +15,10 @@
 wget http://huttenhower.sph.harvard.edu/webfm_send/129 -O hmp_aerobiosis_small.txt
 
 # As using LEfSe through bioconda, need to activate the LEfSe installation:
-source activate lefse
+source activate $conda_env || \
+	conda env update --name $conda_env --file conda_requirements.yml && \
+	source activate $conda_env
+PATH=".:$PATH"
 
 # Running the LEfSe commands with -h gives the list of available options
 
@@ -26,7 +30,7 @@ source activate lefse
 # the value -1 for them.
 # -o 1000000 scales the feature such that the sum (of the same taxonomic leve)
 # is 1M: this is done only for obtaining more meaningful values for the LDA score
-lefse-format_input.py hmp_aerobiosis_small.txt hmp_aerobiosis_small.in -c 1 -s 2 -u 3 -o 1000000
+format_input.py hmp_aerobiosis_small.txt hmp_aerobiosis_small.in -c 1 -s 2 -u 3 -o 1000000
 
 # run_lefse.py performs the actual statistica analysis
 #
@@ -39,7 +43,7 @@ run_lefse.py hmp_aerobiosis_small.in hmp_aerobiosis_small.res
 #
 # Plot the list of biomarkers with their effect size
 # Severak graphical options are available for personalizing the output
-lefse-plot_res.py hmp_aerobiosis_small.res hmp_aerobiosis_small.png
+plot_res.py hmp_aerobiosis_small.res hmp_aerobiosis_small.png
 
 # plot_cladogram.py visualizes the output on a hierarchical tree
 #
@@ -48,7 +52,7 @@ lefse-plot_res.py hmp_aerobiosis_small.res hmp_aerobiosis_small.png
 # In this case we will obtain the RDP taxonomy.
 # This is an early implementation of the module. I'm working on an improved version
 # that will be released independently from LEfSe
-lefse-plot_cladogram.py hmp_aerobiosis_small.res hmp_aerobiosis_small.cladogram.png --format png
+plot_cladogram.py hmp_aerobiosis_small.res hmp_aerobiosis_small.cladogram.png --format png
 
 # Create a directory for storing the raw-data representation of the discovered biomarkers
 mkdir biomarkers_raw_images
@@ -58,10 +62,10 @@ mkdir biomarkers_raw_images
 # The module for exporting the raw-data representation of the features.
 # With the default options we will obtain the images for all the features that are
 # detected as biomarkers
-lefse-plot_features.py hmp_aerobiosis_small.in hmp_aerobiosis_small.res biomarkers_raw_images/
+plot_features.py hmp_aerobiosis_small.in hmp_aerobiosis_small.res biomarkers_raw_images/
 
 ## Turn lefse back off
-source deactivate lefse
+source deactivate $conda_env
 
 ## bonus: seasonal greetings
 # echo '~ Oíche Shamhna féile dhuit!'

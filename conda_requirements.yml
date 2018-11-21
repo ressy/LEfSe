@@ -1,0 +1,14 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=2.7
+  - argparse
+  - matplotlib
+  - numpy
+  - rpy2
+  - r-coin
+  - r-mass
+  - r-modeltools
+  - r-mvtnorm
+  - r-survival
