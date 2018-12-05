@@ -37,11 +37,13 @@ def read_params(args):
     return vars(args)
 
 def read_data(input_file,output_file,otu_only):
+    chunk = lambda line: [entry for entry in line.strip().split('\t') if entry]
+    chunk_phylo = lambda line: chunk(line)[0].split('.')
     with open(input_file, 'r') as inp:
         if not otu_only:
-            rows = [line.strip().split()[:-1] for line in inp.readlines() if len(line.strip().split())>3]
+            rows = [chunk(line)[:-1] for line in inp.readlines() if len(chunk(line))>3]
         else:
-            rows = [line.strip().split()[:-1] for line in inp.readlines() if len(line.strip().split())>3 and len(line.strip().split()[0].split('.'))==8] # a feature with length 8 will have an OTU id associated with it
+            rows = [chunk(line)[:-1] for line in inp.readlines() if len(chunk(line))>3 and len(chunk_phylo(line))==8] # a feature with length 8 will have an OTU id associated with it
     classes = list(set([v[2] for v in rows if len(v)>2]))
     if len(classes) < 1: 
         print "No differentially abundant features found in "+input_file
