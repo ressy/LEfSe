@@ -25,7 +25,7 @@ def read_params(args):
 	parser.add_argument('--font_size',dest="font_size", type=str, default="10")
 	parser.add_argument('-n',dest="unused", metavar="flt", type=float, default=-1.0,help="unused")
 	parser.add_argument('--format', dest="format", default="png", choices=["png","pdf","svg"], type=str, help="the format for the output file")
-	parser.add_argument('-f', dest="f", default="diff", choices=["all","diff","one"], type=str, help="wheter to plot all features (all), only those differentially abundant according to LEfSe or only one (the one given with --feature_name) ")
+	parser.add_argument('-f', dest="f", default="diff", choices=["all","diff","one"], type=str, help="whether to plot all features (all), only those differentially abundant according to LEfSe or only one (the one given with --feature_name) ")
 	parser.add_argument('--feature_name', dest="feature_name", default="", type=str, help="The name of the feature to plot (levels separated by .) ")
 	parser.add_argument('--feature_num', dest="feature_num", default="-1", type=int, help="The number of the feature to plot ")
 	parser.add_argument('--archive', dest="archive", default="none", choices=["zip","none"], type=str, help="")

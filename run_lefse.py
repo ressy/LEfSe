@@ -17,11 +17,11 @@ def read_params(args):
     parser.add_argument('-l',dest="lda_abs_th", metavar='float', type=float, default=2.0,
                 help="set the threshold on the absolute value of the logarithmic LDA score (default 2.0)")
     parser.add_argument('--nlogs',dest="nlogs", metavar='int', type=int, default=3,
-        help="max log ingluence of LDA coeff")
+        help="max log influence of LDA coeff (default: 3)")
     parser.add_argument('--verbose',dest="verbose", metavar='int', choices=[0,1], type=int, default=0,
         help="verbose execution (default 0)")
     parser.add_argument('--wilc',dest="wilc", metavar='int', choices=[0,1], type=int, default=1,
-        help="wheter to perform the Wicoxon step (default 1)")
+        help="whether to perform the Wilcoxon step (default 1)")
     parser.add_argument('-r',dest="rank_tec", metavar='str', choices=['lda','svm'], type=str, default='lda',
         help="select LDA or SVM for effect size (default LDA)")
     parser.add_argument('--svm_norm',dest="svm_norm", metavar='int', choices=[0,1], type=int, default=1,
@@ -33,7 +33,7 @@ def read_params(args):
     parser.add_argument('-c',dest="curv", metavar='int', type=int, default=0,
                 help="set whether perform the wilcoxon test ing the Curtis's approach [BETA VERSION] (default 0)")
     parser.add_argument('-f',dest="f_boots", metavar='float', type=float, default=0.67,
-                help="set the subsampling fraction value for each bootstrap iteration (default 0.66666)")
+                help="set the subsampling fraction value for each bootstrap iteration (default 0.67)")
     parser.add_argument('-s',dest="strict", choices=[0,1,2], type=int, default=0,
                 help="set the multiple testing correction options. 0 no correction (more strict, default), 1 correction for independent comparisons, 2 correction for independent comparison")
 #       parser.add_argument('-m',dest="m_boots", type=int, default=5,

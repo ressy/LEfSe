@@ -28,7 +28,7 @@ def read_params(args):
     parser.add_argument('--orientation',dest="orientation", type=str, choices=["h","v"], default="h" )
     parser.add_argument('--autoscale',dest="autoscale", type=int, choices=[0,1], default=1 )
     parser.add_argument('--background_color',dest="back_color", type=str, choices=["k","w"], default="w", help="set the color of the background")
-    parser.add_argument('--subclades', dest="n_scl", type=int, default=1, help="number of label levels to be dislayed (starting from the leaves, -1 means all the levels, 1 is default )")
+    parser.add_argument('--subclades', dest="n_scl", type=int, default=1, help="number of label levels to be displayed (starting from the leaves, -1 means all the levels, 1 is default )")
     parser.add_argument('--max_feature_len', dest="max_feature_len", type=int, default=60, help="Maximum length of feature strings (def 60)")
     parser.add_argument('--all_feats', dest="all_feats", type=str, default="")
     parser.add_argument('--otu_only', dest="otu_only", default=False, action='store_true', help="Plot only species resolved OTUs (as opposed to all levels)")
